@@ -19,10 +19,8 @@ client:on('messageCreate', function(message)
 		message.channel:send('You rolled a ' .. dice .. ' out of 20')
     if dice==20 then
       message.channel:send('Nat 20! Crititcal Hit')
-      print('nat20check')
     else if dice==1 then
-      message.channel:send('Nat 1! Critical Miss!')
-      print('nat1check')
+      message.channel:send('Nat 1! Critical Shit!')
     end
     end
 	end
