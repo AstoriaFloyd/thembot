@@ -23,6 +23,12 @@ function printFile(file)
   return message
 end
 
+client:on('messageCreate', function(message)
+  if messageDectection(message, "lenny") == true then
+    message.channel:send("( ͡° ͜ʖ ͡°)")
+  end
+end)
+
 client:on('ready', function()
 	print('Logged in as '.. client.user.username)
 end)

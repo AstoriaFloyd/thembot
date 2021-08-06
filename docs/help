@@ -1,3 +1,17 @@
-Hello!
-Line 2
-Line 3!
+```fix
+Basic functions
+---------------
+-ping
+Pong!
+-roll
+Rolls a d20
+-time
+Displays the time in military time, as if you were in chicago
+-help
+^-^
+Basic Information
+-----------------
+All functions start with '!' though this may change in the future
+Under construction! More or less from scratch(Only just got basic I/O working!)
+May have secret functions!
+```
