@@ -1,6 +1,5 @@
 local tools = {}
 
-
 function tools.reseed()
     local seed = os.time()
     math.randomseed(seed)
@@ -23,4 +22,5 @@ function tools.messageDectection(message, search)
         return false
     end
 end
+
 return tools
