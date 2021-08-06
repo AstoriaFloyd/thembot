@@ -16,8 +16,27 @@ client:on('messageCreate', function(message)
 end)
 
 client:on('messageCreate', function(message)
+  if tools.messageDectection(message, "glomp") == true then
+    message.channel:send("https://tenor.com/view/tv-shows-television-tackle-hug-hug-glomping-gif-14859564")
+  end
+end)
+
+client:on('messageCreate', function(message)
+  if message.author.bot then return end
+  if tools.messageDectectionAnywhere(message, "gif") == true then
+    message.channel:send("GIF IS PRONOUNCED WITH A HARD G, ITS NOT JIF OR YIFF")
+  end
+end)
+
+client:on('messageCreate', function(message)
 	if tools.messageDectection(message, "ping") == true then
 		message.channel:send('Pong!')
+	end
+end)
+
+client:on('messageCreate', function(message)
+	if tools.messageDectection(message, "fire") == true then
+		message.channel:send('https://tenor.com/view/elmo-fire-burn-flame-gif-5042503')
 	end
 end)
 
@@ -32,15 +51,7 @@ client:on('messageCreate', function(message)
     message.channel:send(rng.d20())
 	end
 end)
---[[
-client:on('messageCreate', function(message)
-	if message.content == '!time' then
-		message.channel:send('The current time in military time is ' .. os.date() .. ', atleast in Chicago!')
-	end
-end)
-]]
 
---Replacing the above with a more tolerant version
 client:on('messageCreate', function(message)
   if tools.messageDectection(message, "time") == true then
     message.channel:send('The current time in military time is ' .. os.date() .. ' atleast in Chicago!')

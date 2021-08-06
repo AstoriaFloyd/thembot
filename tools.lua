@@ -14,10 +14,19 @@ function tools.printFile(file)
 end
 
 function tools.messageDectection(message, search)
-    local distinctMessage = message.content
+    local distinctMessage = string.lower(message.content)
     local key = "!"
     local keyedSearch = key .. search
     if string.find(distinctMessage, keyedSearch) == 1 then
+      return true
+    else
+        return false
+    end
+end
+
+function tools.messageDectectionAnywhere(message, search)
+    local distinctMessage = string.lower(message.content)
+    if string.find(distinctMessage, search) ~= nil then
       return true
     else
         return false
