@@ -2,8 +2,9 @@ local discordia = require('discordia')
 local client = discordia.Client()
 seed = os.time()
 math.randomseed(seed)
+tabletest = {Hello, Hi, Lol}
 
-function messageDectection (message, search)
+function messageDectection(message, search)
   distinctMessage = message.content
   key = "!"
   keyedSearch = key .. search
@@ -11,9 +12,16 @@ function messageDectection (message, search)
     return true
   else
     return false
-end
+  end
 end
 
+
+function printFile(file)
+  rawFile = io.open(file, r)
+  message = rawFile:read("*all")
+  rawFile:close()
+  return message
+end
 
 client:on('ready', function()
 	print('Logged in as '.. client.user.username)
@@ -22,6 +30,12 @@ end)
 client:on('messageCreate', function(message)
 	if messageDectection(message, "ping") == true then
 		message.channel:send('Pong!')
+	end
+end)
+
+client:on('messageCreate', function(message)
+	if messageDectection(message, "ThemHelp") == true then
+    message.channel:send(printFile("docs/help"))
 	end
 end)
 
