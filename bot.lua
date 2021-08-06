@@ -3,18 +3,28 @@ local client = discordia.Client()
 seed = os.time()
 math.randomseed(seed)
 
+function messageDectection (message, search)
+  distinctMessage = message.content
+  if string.find(distinctMessage, search) == 1 then
+    return true
+  else
+    return false
+end
+end
+
+
 client:on('ready', function()
 	print('Logged in as '.. client.user.username)
 end)
 
 client:on('messageCreate', function(message)
-	if message.content == '!ping' then
+	if messageDectection(message, "!ping") == true then
 		message.channel:send('Pong!')
 	end
 end)
 
 client:on('messageCreate', function(message)
-	if message.content == '!roll' then
+	if messageDectection(message, "!roll") == true then
     dice = math.random(20)
 		message.channel:send('You rolled a ' .. dice .. ' out of 20')
     if dice==20 then
@@ -26,10 +36,19 @@ client:on('messageCreate', function(message)
 	end
 end)
 
+--[[
 client:on('messageCreate', function(message)
 	if message.content == '!time' then
 		message.channel:send('The current time in military time is ' .. os.date() .. ', atleast in Chicago!')
 	end
+end)
+]]
+
+--Replacing the above with a more tolerant version
+client:on('messageCreate', function(message)
+  if messageDectection(message, "!time") == true then
+    message.channel:send('The current time in military time is ' .. os.date() .. ' atleast in Chicago!')
+  end
 end)
 
 
