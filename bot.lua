@@ -1,8 +1,8 @@
 local discordia = require('discordia')
 local client = discordia.Client()
+basic = require("./basicCommands.lua")
 seed = os.time()
 math.randomseed(seed)
-tabletest = {Hello, Hi, Lol}
 
 function messageDectection(message, search)
   distinctMessage = message.content
@@ -29,7 +29,8 @@ client:on('messageCreate', function(message)
   end
 end)
 
-client:on('ready', function()
+client:once("ready", function()
+  client:setGame("Astoria's bot, very sad!")
 	print('Logged in as '.. client.user.username)
 end)
 
@@ -57,7 +58,6 @@ client:on('messageCreate', function(message)
     end
 	end
 end)
-
 --[[
 client:on('messageCreate', function(message)
 	if message.content == '!time' then
@@ -73,5 +73,10 @@ client:on('messageCreate', function(message)
   end
 end)
 
+client:on('messageCreate', function(message)
+  if messageDectection(message, "hiddentest") == true then
+    message.channel:send(basic.helloWorld())
+  end
+end)
 
 client:run('Bot ODczMjU1Mjk2MDI0MzIyMDU5.YQ1wXg.BbXq1fu-4nlG95EkLkHujVEObG4')
