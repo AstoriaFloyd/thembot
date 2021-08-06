@@ -22,7 +22,7 @@ client:on('messageCreate', function(message)
 end)
 
 client:on('messageCreate', function(message)
-	if tools.messageDectection(message, "ThemHelp") == true then
+	if tools.messageDectection(message, "helpme") == true then
     message.channel:send(tools.printFile("docs/help"))
 	end
 end)
