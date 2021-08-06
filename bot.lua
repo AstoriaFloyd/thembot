@@ -1,33 +1,8 @@
 local discordia = require('discordia')
 local client = discordia.Client()
-basic = require("./basicCommands.lua")
-seed = os.time()
-math.randomseed(seed)
-
-function messageDectection(message, search)
-  distinctMessage = message.content
-  key = "!"
-  keyedSearch = key .. search
-  if string.find(distinctMessage, keyedSearch) == 1 then
-    return true
-  else
-    return false
-  end
-end
-
-
-function printFile(file)
-  rawFile = io.open(file, r)
-  message = rawFile:read("*all")
-  rawFile:close()
-  return message
-end
-
-client:on('messageCreate', function(message)
-  if messageDectection(message, "lenny") == true then
-    message.channel:send("( ͡° ͜ʖ ͡°)")
-  end
-end)
+local basicCommands = require("./basicCommands.lua")
+local tools = require("./tools.lua")
+local rng = require("./rng.lua")
 
 client:once("ready", function()
   client:setGame("Astoria's bot, very sad!")
@@ -35,27 +10,26 @@ client:once("ready", function()
 end)
 
 client:on('messageCreate', function(message)
-	if messageDectection(message, "ping") == true then
+  if tools.messageDectection(message, "lenny") == true then
+    message.channel:send("( ͡° ͜ʖ ͡°)")
+  end
+end)
+
+client:on('messageCreate', function(message)
+	if tools.messageDectection(message, "ping") == true then
 		message.channel:send('Pong!')
 	end
 end)
 
 client:on('messageCreate', function(message)
-	if messageDectection(message, "ThemHelp") == true then
-    message.channel:send(printFile("docs/help"))
+	if tools.messageDectection(message, "ThemHelp") == true then
+    message.channel:send(tools.printFile("docs/help"))
 	end
 end)
 
 client:on('messageCreate', function(message)
-	if messageDectection(message, "roll") == true then
-    dice = math.random(20)
-		message.channel:send('You rolled a ' .. dice .. ' out of 20')
-    if dice==20 then
-      message.channel:send('Nat 20! Crititcal Hit')
-    else if dice==1 then
-      message.channel:send('Nat 1! Critical Shit!')
-    end
-    end
+	if tools.messageDectection(message, "roll") == true then
+    message.channel:send(rng.d20())
 	end
 end)
 --[[
@@ -68,14 +42,14 @@ end)
 
 --Replacing the above with a more tolerant version
 client:on('messageCreate', function(message)
-  if messageDectection(message, "time") == true then
+  if tools.messageDectection(message, "time") == true then
     message.channel:send('The current time in military time is ' .. os.date() .. ' atleast in Chicago!')
   end
 end)
 
 client:on('messageCreate', function(message)
-  if messageDectection(message, "hiddentest") == true then
-    message.channel:send(basic.helloWorld())
+  if tools.messageDectection(message, "moduleTest") == true then
+    message.channel:send(basicCommands.helloWorld())
   end
 end)
 

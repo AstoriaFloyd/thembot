@@ -1,7 +1,10 @@
 local basicCommands = {}
 
-function helloWorld()
+function basicCommands.helloWorld()
   return("Hello world!")
 end
+
+
+
 
 return basicCommands
