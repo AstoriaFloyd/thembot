@@ -21,6 +21,7 @@ client:on('messageCreate', function(message)
   end
 end)
 
+--Re-Init detector. Only command that itself cannot be fully re-initialized
 client:on('messageCreate', function(message)
   local user = message.guild:getMember(message.author.id)
   if not user:hasPermission("administrator") then
