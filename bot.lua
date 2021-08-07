@@ -12,6 +12,7 @@ end)
 client:on('messageCreate', function(message)
   if tools.messageDectection(message, "lenny") == true then
     message.channel:send("( ͡° ͜ʖ ͡°)")
+    message:delete()
   end
 end)
 
@@ -32,6 +33,15 @@ client:on('messageCreate', function(message)
 	if tools.messageDectection(message, "ping") == true then
 		message.channel:send('Pong!')
 	end
+end)
+
+client:on('userBan', function()
+  local banChannel, err = client:getChannel("872283716486066200")
+  if not banChannel then
+    p("Attempt to fetch the channel object: ", err)
+    return
+  end
+  banChannel:send("User was banned ( ͡° ͜ʖ ͡°)")
 end)
 
 client:on('messageCreate', function(message)
@@ -80,6 +90,16 @@ client:on('messageCreate', function(message)
     local cowsaid = basicCommands.cowsay(cowsay)
     local result = "```fix" .. "\n" .. cowsaid .. "```"
     message.channel:send(result)
+  end
+end)
+
+client:on('messageCreate', function(message)
+  if tools.messageDectection(message, "echo ") == true then
+    local echo = string.sub(message.content, 7)
+    local echoed = basicCommands.echo(echo)
+    local result = "```fix" .. "\n" .. echoed .. "```"
+    message.channel:send(result)
+    message:delete()
   end
 end)
 

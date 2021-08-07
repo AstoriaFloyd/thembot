@@ -11,8 +11,14 @@ function basicCommands.figlet(string)
 end
 
 function basicCommands.cowsay(string)
-  local figleted = io.popen("cowsay ".. string)
-  local result = figleted:read("*all")
+  local cowsaid = io.popen("cowsay ".. string)
+  local result = cowsaid:read("*all")
+  return result
+end
+
+function basicCommands.echo(string)
+  local echoed = io.popen("echo ".. string)
+  local result = echoed:read("*all")
   return result
 end
 
