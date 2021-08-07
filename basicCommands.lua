@@ -10,4 +10,10 @@ function basicCommands.figlet(string)
   return result
 end
 
+function basicCommands.cowsay(string)
+  local figleted = io.popen("cowsay ".. string)
+  local result = figleted:read("*all")
+  return result
+end
+
 return basicCommands

@@ -67,4 +67,13 @@ client:on('messageCreate', function(message)
   end
 end)
 
+client:on('messageCreate', function(message)
+  if tools.messageDectection(message, "cowsay ") == true then
+    local cowsay = string.sub(message.content, 9)
+    local cowsaid = basicCommands.cowsay(cowsay)
+    local result = "```fix" .. "\n" .. cowsaid .. "```"
+    message.channel:send(result)
+  end
+end)
+
 client:run('Bot ODczMjU1Mjk2MDI0MzIyMDU5.YQ1wXg.BbXq1fu-4nlG95EkLkHujVEObG4')
