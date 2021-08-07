@@ -15,7 +15,30 @@ function tools.printFile(file)
     return message
 end
 
+function tools.tableConcat(t1,t2)
+    for i=1,#t2 do
+        t1[#t1+1] = t2[i]
+    end
+    return t1
+end
+
+function tools.tableMerge(t1, t2)
+    for k,v in pairs(t2) do
+        if type(v) == "table" then
+            if type(t1[k] or false) == "table" then
+                tools.tableMerge(t1[k] or {}, t2[k] or {})
+            else
+                t1[k] = v
+            end
+        else
+            t1[k] = v
+        end
+    end
+    return t1
+end
+
 --Message detection logic. If string.find detects both the desired string, and the key, starting at position 1, do the thing.
+--Now deprecated
 function tools.messageDectection(message, search)
     local distinctMessage = string.lower(message.content)
     local key = "!"
@@ -36,5 +59,24 @@ function tools.messageDectectionAnywhere(message, search)
         return false
     end
 end
+
+--Executes Figlet on the host machine.
+function tools.figlet(string)
+    local figleted = io.popen("figlet ".. string)
+    local result = figleted:read("*all")
+    return result
+  end
+  
+  --Executes Cowsay on the host machine.
+  function tools.cowsay(string)
+    local cowsaid = io.popen("cowsay ".. string)
+    local result = cowsaid:read("*all")
+    return result
+  end
+  
+  --Takes input and makes it output. GIGO.
+  function tools.echo(string)
+    return string
+  end
 
 return tools
