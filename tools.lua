@@ -1,11 +1,13 @@
 ---@diagnostic disable: undefined-global
 local tools = {}
 
-function tools.reseed()
+--initializes or re-initializes the seed of RNG, based on Unix Time.
+function tools.seed()
     local seed = os.time()
     math.randomseed(seed)
 end
 
+--Reads an entire file, outputs as string.
 function tools.printFile(file)
     local rawFile = io.open(file, r)
     local message = rawFile:read("*all")
@@ -13,6 +15,7 @@ function tools.printFile(file)
     return message
 end
 
+--Message detection logic. If string.find detects both the desired string, and the key, starting at position 1, do the thing.
 function tools.messageDectection(message, search)
     local distinctMessage = string.lower(message.content)
     local key = "!"
@@ -24,6 +27,7 @@ function tools.messageDectection(message, search)
     end
 end
 
+--Special message detection logic. If string.find detects both the desired string, do the thing. Useful for chat filers.
 function tools.messageDectectionAnywhere(message, search)
     local distinctMessage = string.lower(message.content)
     if string.find(distinctMessage, search) ~= nil then

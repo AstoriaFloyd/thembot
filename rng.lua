@@ -1,6 +1,7 @@
 local rng = {}
 local tools = require("./tools.lua")
 
+--Rolls a d20, if output is 1, Critical miss(or Shit), if output is 20, critical hit.
 function rng.d20()
     tools.reseed()
     local dice = math.random(20)
