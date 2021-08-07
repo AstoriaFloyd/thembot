@@ -25,14 +25,6 @@ client:on('messageCreate', function(message)
   end
 end)
 
---Every time someone says "gif" or some varient of that, often in gifs themselves, it pastes that text. May replace with a copypasta.
-client:on('messageCreate', function(message)
-  if message.author.bot then return end
-  if tools.messageDectectionAnywhere(message, "gif") == true then
-    message.channel:send("GIF IS PRONOUNCED WITH A HARD G, ITS NOT JIF OR YIFF")
-  end
-end)
-
 --Ping Pong function, generally just to see if its on or not without triggering a more complex function. Also tests if its really borked.
 client:on('messageCreate', function(message)
 	if tools.messageDectection(message, "ping") == true then
@@ -125,6 +117,14 @@ client:on('userBan', function()
     return
   end
   banChannel:send("User was banned ( ͡° ͜ʖ ͡°)")
+end)
+
+--Every time someone says "gif" or some varient of that, often in gifs themselves, it pastes that text. May replace with a copypasta.
+client:on('messageCreate', function(message)
+  if message.author.bot then return end
+  if tools.messageDectectionAnywhere(message, "gif") == true then
+    message.channel:send("GIF IS PRONOUNCED WITH A HARD G, ITS NOT JIF OR YIFF")
+  end
 end)
 
 --Insert Token in a .lua file with simply returns it as a string.
