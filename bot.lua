@@ -111,4 +111,6 @@ client:on('messageCreate', function(message)
   end
 end)
 
-client:run('Bot ODczMjU1Mjk2MDI0MzIyMDU5.YQ1wXg.BbXq1fu-4nlG95EkLkHujVEObG4')
+--Insert Token in a .lua file with simply returns it as a string.
+local token = require("./token.lua")
+client:run('Bot '..token)
