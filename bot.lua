@@ -59,8 +59,11 @@ client:on('messageCreate', function(message)
 end)
 
 client:on('messageCreate', function(message)
-  if tools.messageDectection(message, "moduleTest") == true then
-    message.channel:send(basicCommands.helloWorld())
+  if tools.messageDectection(message, "figlet ") == true then
+    local figletthis = string.sub(message.content, 9)
+    local figlet = basicCommands.figlet(figletthis)
+    local result = "```fix" .. "\n" .. figlet .. "```"
+    message.channel:send(result)
   end
 end)
 
