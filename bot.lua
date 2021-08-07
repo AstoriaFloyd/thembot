@@ -21,9 +21,10 @@ end)
 client:on('messageCreate', function(message)
   if message.author.bot then return end
   local args = message.content:split(" ")
-  local command = commands[args[1]]
+  local lowerArgs = args[1]:lower()
+  local command = commands[lowerArgs]
   if command then
-    command.exec(message)
+    command.exec(message, args)
   end
 end)
 

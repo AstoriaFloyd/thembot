@@ -40,6 +40,11 @@ local commands = { -- Define commands its a table that will contain our commands
         message:delete()
     end
     };
+[prefix..'testArgs'] = { -- 
+   exec = function (message, args)
+        message.channel:send(args[2])
+    end
+    };
 }
 
 
