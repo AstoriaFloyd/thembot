@@ -59,6 +59,13 @@ client:on('messageCreate', function(message)
 end)
 
 client:on('messageCreate', function(message)
+  if tools.messageDectection(message, "analyze") == true then
+    print(message.content)
+    print(message.attachments)
+  end
+end)
+
+client:on('messageCreate', function(message)
   if tools.messageDectection(message, "figlet ") == true then
     local figletthis = string.sub(message.content, 9)
     local figlet = basicCommands.figlet(figletthis)
@@ -73,6 +80,14 @@ client:on('messageCreate', function(message)
     local cowsaid = basicCommands.cowsay(cowsay)
     local result = "```fix" .. "\n" .. cowsaid .. "```"
     message.channel:send(result)
+  end
+end)
+
+client:on('messageCreate', function(message)
+  if tools.messageDectection(message, "welsh") == true then
+    image = "https://cdn.discordapp.com/attachments/748713417489252503/770289379586867231/image0.gif"
+    message.channel:send(image)
+    message:delete()
   end
 end)
 

@@ -1,13 +1,17 @@
 ```fix
 Basic functions
 ---------------
+-figlet
+Converts text to ASCII art
+-cowsay
+Converts text to the speech of a cow
 -ping
 Pong!
 -roll
 Rolls a d20
 -time
 Displays the time in military time, as if you were in chicago
--help
+-helpme
 ^-^
 Basic Information
 -----------------
