@@ -7,7 +7,7 @@ discordia.extensions()
 client:once("ready", function()
   client:setGame("Astoria's bot, very sad!")
 	print('Logged in as '.. client.user.username)
-  commands = tools.initialize()
+  Commands = tools.initialize()
 end)
 
 --Command handler
@@ -15,7 +15,7 @@ client:on('messageCreate', function(message)
   if message.author.bot then return end
   local args = message.content:split(" ")
   local lowerArgs = args[1]:lower()
-  local command = commands[lowerArgs]
+  local command = Commands[lowerArgs]
   if command then
     command.exec(message, args)
   end
@@ -23,7 +23,7 @@ end)
 
 client:on('messageCreate', function(message)
   if tools.messageDectection(message, "reinitialize") == true then
-    commands = tools.initialize()
+    Commands = tools.initialize()
     message:reply("Re-Initialized!")
   end
 end)
