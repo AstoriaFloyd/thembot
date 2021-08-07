@@ -15,7 +15,7 @@ function tools.initialize()
     local simpleCommands = simpleCommands.initialize()
     local commands = tools.tableMerge(simpleCommands, complexCommands)
     return commands
-    end
+end
 
 --Reads an entire file, outputs as string.
 function tools.printFile(file)

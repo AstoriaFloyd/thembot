@@ -1,13 +1,13 @@
 local discordia = require('discordia')
 local client = discordia.Client()
-local tools = require("./tools.lua")
+Tools = dofile("./tools.lua")
 discordia.extensions()
 
 --Setup bot here, initializes bot
 client:once("ready", function()
   client:setGame("Astoria's bot, very sad!")
 	print('Logged in as '.. client.user.username)
-  Commands = tools.initialize()
+  Commands = Tools.initialize()
 end)
 
 --Command handler
@@ -22,10 +22,16 @@ client:on('messageCreate', function(message)
 end)
 
 client:on('messageCreate', function(message)
-  if tools.messageDectection(message, "reinitialize") == true then
-    Commands = tools.initialize()
-    message:reply("Re-Initialized!")
-  end
+  local user = message.guild:getMember(message.author.id)
+  if not user:hasPermission("administrator") then
+    message:reply("You cannot re-initialize this bot!")
+  else
+    if Tools.messageDectection(message, "reinitialize") == true then
+      Commands = Tools.initialize()
+      Tools = dofile("./tools.lua")
+      message:reply("Re-Initialized!")
+    end
+  end  
 end)
 
 --When a user is banned, post a lenney.
