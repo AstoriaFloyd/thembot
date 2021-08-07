@@ -1,5 +1,6 @@
 local basicCommands = {}
 local prefix = require("./settings.lua")
+
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'lenny'] = { -- Creates a lenny face
    exec = function (message)
