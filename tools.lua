@@ -7,6 +7,16 @@ function tools.seed()
     math.randomseed(seed)
 end
 
+--Initializes commands.
+function tools.initialize()
+    local simpleCommands = dofile("./simpleCommands.lua")
+    local complexCommands = dofile("./complexCommands.lua")
+    local complexCommands = complexCommands.initialize()
+    local simpleCommands = simpleCommands.initialize()
+    local commands = tools.tableMerge(simpleCommands, complexCommands)
+    return commands
+    end
+
 --Reads an entire file, outputs as string.
 function tools.printFile(file)
     local rawFile = io.open(file, r)

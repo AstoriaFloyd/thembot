@@ -3,18 +3,11 @@ local client = discordia.Client()
 local tools = require("./tools.lua")
 discordia.extensions()
 
-local simpleCommands = require("./simpleCommands.lua")
-local complexCommands = require("./complexCommands.lua")
-
---Initialize commands, CLEAN THIS UP, MAKE IT DO MORE THEN TWO, CURRENTLY WE NEED TO JUST DO THIS OVER AND OVER
-local complexCommands = complexCommands.initialize()
-local simpleCommands = simpleCommands.initialize()
-local commands = tools.tableMerge(simpleCommands, complexCommands)
-
 --Setup bot here, initializes bot
 client:once("ready", function()
   client:setGame("Astoria's bot, very sad!")
 	print('Logged in as '.. client.user.username)
+  commands = tools.initialize()
 end)
 
 --Command handler
@@ -25,6 +18,13 @@ client:on('messageCreate', function(message)
   local command = commands[lowerArgs]
   if command then
     command.exec(message, args)
+  end
+end)
+
+client:on('messageCreate', function(message)
+  if tools.messageDectection(message, "reinitialize") == true then
+    commands = tools.initialize()
+    message:reply("Re-Initialized!")
   end
 end)
 

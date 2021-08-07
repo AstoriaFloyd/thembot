@@ -1,5 +1,5 @@
 local basicCommands = {}
-local prefix = require("./settings.lua")
+local prefix = dofile("./settings.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'lenny'] = { -- Creates a lenny face
@@ -34,15 +34,10 @@ local commands = { -- Define commands its a table that will contain our commands
         p(message.attachments)
     end
     };
-[prefix..'welsh'] = { -- 
+[prefix..'welsh'] = { -- Welsh.
    exec = function (message)
         message.channel:send("https://cdn.discordapp.com/attachments/748713417489252503/770289379586867231/image0.gif")
         message:delete()
-    end
-    };
-[prefix..'testArgs'] = { -- 
-   exec = function (message, args)
-        message.channel:send(args[2])
     end
     };
 }

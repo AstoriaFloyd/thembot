@@ -1,8 +1,8 @@
-local tools = require("./tools.lua")
-local rng = require("./rng.lua")
+local tools = dofile("./tools.lua")
+local rng = dofile("./rng.lua")
 local complexCommands = {}
 
-local prefix = require("./settings.lua")
+local prefix = dofile("./settings.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'helpme'] = { -- Dumps docs/help to chat, took me forever to figure out.
