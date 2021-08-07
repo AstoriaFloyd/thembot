@@ -17,4 +17,21 @@ function rng.d20()
     return message
 end
 
+function rng.roll(arg)
+     tools.seed()
+     local mathArgument = arg[2]
+     local compareNumber = tonumber(mathArgument)
+     local dice = math.random(mathArgument)
+     local messagePart1 = ('You rolled a ' .. dice .. ' out of '..mathArgument)
+     local messagepart2 = ''
+     if dice == compareNumber then
+          messagepart2 = ('Nat '..mathArgument..'! Crititcal Hit')
+     else if dice==1 then
+          messagepart2 = ('Nat 1! Critical Shit!')
+     end
+     end
+     local message = messagePart1 .. '\n' .. messagepart2
+     return message
+ end
+
 return rng

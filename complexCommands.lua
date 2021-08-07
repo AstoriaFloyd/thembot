@@ -11,8 +11,12 @@ local commands = { -- Define commands its a table that will contain our commands
     end
     };
 [prefix..'roll'] = { -- Rolls a d20, check RNG for more info.
-   exec = function (message)
+   exec = function (message, arg)
+    if not arg[2] then
         message.channel:send(rng.d20())
+    else
+        message.channel:send(rng.roll(arg))
+    end
     end
     };
 [prefix..'figlet'] = { -- Parrots input to figlet, then echos it to the same channel you are in.
