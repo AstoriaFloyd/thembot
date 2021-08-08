@@ -24,13 +24,13 @@ end)
 --Re-Init detector. Only command that itself cannot be fully re-initialized
 client:on('messageCreate', function(message)
   local user = message.guild:getMember(message.author.id)
-  if not user:hasPermission("administrator") then
-    message:reply("You cannot re-initialize this bot!")
-  else
     if Tools.messageDectection(message, "reinitialize") == true then
-      Commands = Tools.initialize()
-      Tools = dofile("./tools.lua")
-      message:reply("Re-Initialized!")
+      if not user:hasPermission("administrator") then
+        message:reply("You cannot re-initialize this bot!")
+      else
+        Commands = Tools.initialize()
+        Tools = dofile("./tools.lua")
+        message:reply("Re-Initialized!")
     end
   end  
 end)
@@ -48,3 +48,7 @@ end)
 --Insert Token in a .lua file with simply returns it as a string.
 local token = require("./token.lua")
 client:run('Bot '..token)
+-- This project is libre, and licenced under the terms of the
+-- DO WHAT THE FUCK YOU WANT TO PUBLIC LICENCE, version 3.1,
+-- as published by dtf on July 2019. See the COPYING file or
+-- https://ph.dtf.wtf/w/wtfpl/#version-3-1 for more details.
