@@ -7,8 +7,8 @@ Converts text to ASCII art
 Converts text to the speech of a cow
 -ping
 Pong!
--roll
-Rolls a d20
+-roll [Argument]
+Rolls a dice, by default d20!
 -time
 Displays the time in military time, as if you were in chicago
 -helpme
@@ -18,4 +18,11 @@ Basic Information
 All functions start with '!' though this may change in the future
 Under construction! More or less from scratch(Only just got basic I/O working!)
 May have secret functions!
+Mess with the code
+------------------
+The source code is freely availible at 
+https://github.com/AstoriaFloyd/thembot
+Feel free to modify, redistribute, whatever.
+If you want to monitise it, sure go ahead.
+This code follows the WTFPL, in all 0 of its conditions.
 ```
