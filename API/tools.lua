@@ -9,8 +9,8 @@ end
 
 --Initializes commands.
 function tools.initialize()
-    local simpleCommands = dofile("./simpleCommands.lua")
-    local complexCommands = dofile("./complexCommands.lua")
+    local simpleCommands = dofile("./commands/simpleCommands.lua")
+    local complexCommands = dofile("./commands/complexCommands.lua")
     local complexCommands = complexCommands.initialize()
     local simpleCommands = simpleCommands.initialize()
     local commands = tools.tableMerge(simpleCommands, complexCommands)

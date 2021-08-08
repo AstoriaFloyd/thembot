@@ -1,5 +1,5 @@
 local basicCommands = {}
-local prefix = dofile("./settings.lua")
+local prefix = dofile("./docs/settings.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'lenny'] = { -- Creates a lenny face

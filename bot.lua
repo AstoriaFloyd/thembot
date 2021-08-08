@@ -1,6 +1,6 @@
 local discordia = require('discordia')
 local client = discordia.Client()
-Tools = dofile("./tools.lua")
+Tools = dofile("./API/tools.lua")
 discordia.extensions()
 
 --Setup bot here, initializes bot
@@ -29,7 +29,7 @@ client:on('messageCreate', function(message)
         message:reply("You cannot re-initialize this bot!")
       else
         Commands = Tools.initialize()
-        Tools = dofile("./tools.lua")
+        Tools = dofile("./API/tools.lua")
         message:reply("Re-Initialized!")
     end
   end  
@@ -46,7 +46,7 @@ client:on('userBan', function()
 end)
 
 --Insert Token in a .lua file with simply returns it as a string.
-local token = require("./token.lua")
+local token = require("./docs/token.lua")
 client:run('Bot '..token)
 -- This project is libre, and licenced under the terms of the
 -- DO WHAT THE FUCK YOU WANT TO PUBLIC LICENCE, version 3.1,

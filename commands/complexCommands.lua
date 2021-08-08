@@ -1,8 +1,8 @@
-local tools = dofile("./tools.lua")
-local rng = dofile("./rng.lua")
+local tools = dofile("./API/tools.lua")
+local rng = dofile("./API/rng.lua")
 local complexCommands = {}
 
-local prefix = dofile("./settings.lua")
+local prefix = dofile("./docs/settings.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'helpme'] = { -- Dumps docs/help to chat, took me forever to figure out.

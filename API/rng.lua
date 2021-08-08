@@ -1,5 +1,5 @@
 local rng = {}
-local tools = dofile("./tools.lua")
+local tools = dofile("./API/tools.lua")
 
 --Rolls a d20, if output is 1, Critical miss(or Shit), if output is 20, critical hit.
 function rng.d20()
