@@ -19,6 +19,7 @@ local commands = { -- Define commands its a table that will contain our commands
     end
     end
     };
+   --[[
 [prefix..'figlet'] = { -- Parrots input to figlet, then echos it to the same channel you are in.
    exec = function (message)
     local prefixLength = string.len(prefix)
@@ -39,6 +40,7 @@ local commands = { -- Define commands its a table that will contain our commands
     message:delete()
     end
     };
+   ]]
 [prefix..'echo'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
    exec = function (message)
     local prefixLength = string.len(prefix)
