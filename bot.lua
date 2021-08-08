@@ -12,28 +12,35 @@ end)
 
 --Command handler
 client:on('messageCreate', function(message)
-  if message.author.bot then return end
-  local args = message.content:split(" ")
-  local lowerArgs = args[1]:lower()
-  local command = Commands[lowerArgs]
-  if command then
-    command.exec(message, args)
-  end
-end)
-
---Re-Init detector. Only command that itself cannot be fully re-initialized
-client:on('messageCreate', function(message)
-  local user = message.guild:getMember(message.author.id)
-    if Tools.messageDectection(message, "reinitialize") == true then
-      if not user:hasPermission("administrator") then
-        message:reply("You cannot re-initialize this bot!")
-      else
+    if message.author.bot then return end
+    if Tools.testModeDetection() == true then
         Commands = Tools.initialize()
         Tools = dofile("./API/tools.lua")
-        message:reply("Re-Initialized!")
     end
-  end  
+    local args = message.content:split(" ")
+    local lowerArgs = args[1]:lower()
+    local command = Commands[lowerArgs]
+    if command then
+        command.exec(message, args)
+    elseif Tools.testModeDetection() == false and Tools.messageDectection(message, "reinitialize") == true then
+        reinitialize(message)
+    elseif Tools.testModeDetection() == true and Tools.messageDectection(message, "reinitialize") == true then
+        message:reply("You cannot preform this command because testMode is on!")
+    end
 end)
+
+function reinitialize(message)
+  local user = message.guild:getMember(message.author.id)
+    if Tools.messageDectection(message, "reinitialize") == true then
+        if not user:hasPermission("administrator") then
+            message:reply("You cannot re-initialize this bot!")
+        else
+            Commands = Tools.initialize()
+            Tools = dofile("./API/tools.lua")
+            message:reply("Re-Initialized!")
+        end
+    end
+end
 
 --When a user is banned, post a lenney.
 client:on('userBan', function()

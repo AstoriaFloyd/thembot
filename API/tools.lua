@@ -17,6 +17,13 @@ function tools.initialize()
     return commands
 end
 
+--Reads testmode.lua
+function tools.testModeDetection()
+    return dofile("./docs/testmode.lua")
+end
+
+--
+
 --Reads an entire file, outputs as string.
 function tools.printFile(file)
     local rawFile = io.open(file, r)
@@ -51,7 +58,7 @@ end
 --Now deprecated
 function tools.messageDectection(message, search)
     local distinctMessage = string.lower(message.content)
-    local key = require("./docs/settings.lua")
+    local key = dofile("./docs/key.lua")
     local keyedSearch = key .. search
     if string.find(distinctMessage, keyedSearch) == 1 then
       return true

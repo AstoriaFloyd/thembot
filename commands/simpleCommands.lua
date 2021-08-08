@@ -1,45 +1,58 @@
 local basicCommands = {}
-local prefix = dofile("./docs/settings.lua")
+local prefix = dofile("./docs/key.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'lenny'] = { -- Creates a lenny face
-   exec = function (message)
-        message.channel:send('( ͡° ͜ʖ ͡°)') 
-    end
-    };
+exec = function (message)
+    message.channel:send('( ͡° ͜ʖ ͡°)') 
+end
+};
+
 [prefix..'glomp'] = { -- Posts an image of glomping, may add RNG later.
-   exec = function (message)
-        message.channel:send('https://tenor.com/view/tv-shows-television-tackle-hug-hug-glomping-gif-14859564') 
-    end
-    };
+exec = function (message)
+    message.channel:send('https://tenor.com/view/tv-shows-television-tackle-hug-hug-glomping-gif-14859564') 
+end
+};
+
 [prefix..'ping'] = { -- Ping Pong function, generally just to see if its on or not without triggering a more complex function. Also tests if its really borked.
-   exec = function (message)
-        message.channel:send("Pong!")
-    end
-    };
+exec = function (message)
+    message.channel:send("Pong!")
+end
+};
+
 [prefix..'fire'] = { -- Places elmo on fire in chat.
-   exec = function (message)
-        message.channel:send("https://tenor.com/view/elmo-fire-burn-flame-gif-5042503")
-    end
-    };
+exec = function (message)
+    message.channel:send("https://tenor.com/view/elmo-fire-burn-flame-gif-5042503")
+end
+};
 
 [prefix..'time'] = { -- Posts time to channel, stuck in military time, perhaps use a io.popen() to get actual system time in a more human readable format?
-   exec = function (message)
-        message.channel:send('The current time in military time is ' .. os.date() .. ' atleast in Chicago!')
-    end
-    };
+exec = function (message)
+    message.channel:send('The current time in military time is ' .. os.date() .. ' atleast in Chicago!')
+end
+};
+
 [prefix..'analyze'] = { -- Prints contents and attachments to console.
-   exec = function (message)
-        p(message.content)
-        p(message.attachments)
-    end
-    };
+exec = function (message)
+    p(message.content)
+    p(message.attachments)
+end
+};
+
 [prefix..'welsh'] = { -- Welsh.
-   exec = function (message)
-        message.channel:send("https://cdn.discordapp.com/attachments/748713417489252503/770289379586867231/image0.gif")
-        message:delete()
-    end
-    };
+exec = function (message)
+    message.channel:send("https://cdn.discordapp.com/attachments/748713417489252503/770289379586867231/image0.gif")
+    message:delete()
+end
+};
+
+[prefix..'test'] = { -- Test Command.
+exec = function (message)
+    message.channel:send("I can add new commands on the fly, probably just going to be for testing purposes. Probably a security hole. Hence why this is the _experimental_ branch")
+    message:delete()
+end
+};
+
 }
 
 
