@@ -51,7 +51,7 @@ end
 --Now deprecated
 function tools.messageDectection(message, search)
     local distinctMessage = string.lower(message.content)
-    local key = "!"
+    local key = require("./docs/settings.lua")
     local keyedSearch = key .. search
     if string.find(distinctMessage, keyedSearch) == 1 then
       return true
