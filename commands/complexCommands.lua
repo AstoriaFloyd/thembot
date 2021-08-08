@@ -26,6 +26,7 @@ local commands = { -- Define commands its a table that will contain our commands
     local figlet = tools.figlet(figletthis)
     local result = "```fix" .. "\n" .. figlet .. "```"
     message.channel:send(result)
+    message:delete()
     end
     };
 [prefix..'cowsay'] = { -- Parrots input to cowsay, then echos it to the same channel you are in.
@@ -35,6 +36,7 @@ local commands = { -- Define commands its a table that will contain our commands
     local cowsaid = tools.cowsay(cowsay)
     local result = "```fix" .. "\n" .. cowsaid .. "```"
     message.channel:send(result)
+    message:delete()
     end
     };
 [prefix..'echo'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
