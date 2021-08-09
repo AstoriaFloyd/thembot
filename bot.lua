@@ -7,25 +7,39 @@ discordia.extensions()
 client:once("ready", function()
   client:setGame("Astoria's bot, very sad!")
 	print('Logged in as '.. client.user.username)
-  Commands = Tools.initialize()
+    Commands = Tools.initialize()
+    if Tools.testModeDetection() == true then
+        mode = "testMode"
+    else
+        mode = "normal"
+    end
 end)
 
 --Command handler
 client:on('messageCreate', function(message)
     if message.author.bot then return end
-    if Tools.testModeDetection() == true then
+    if Tools.testModeDetection() == true and mode == "normal" then
+        mode = "testMode"
+    elseif Tools.testModeDetection() == false and mode == "testMode" then
+        mode = "normal"
+        selfReinitialize()
+    end
+    if mode == "testMode" then
         Commands = Tools.initialize()
         Tools = dofile("./API/tools.lua")
+        p("reinitd at "..os.time())
     end
     local args = message.content:split(" ")
     local lowerArgs = args[1]:lower()
     local command = Commands[lowerArgs]
     if command then
         command.exec(message, args)
-    elseif Tools.testModeDetection() == false and Tools.messageDectection(message, "reinitialize") == true then
+    elseif mode == "normal" and Tools.messageDectection(message, "reinitialize") == true then
+        p("reinitd at "..os.time())
         reinitialize(message)
-    elseif Tools.testModeDetection() == true and Tools.messageDectection(message, "reinitialize") == true then
+    elseif mode == "testMode" and Tools.messageDectection(message, "reinitialize") == true then
         message:reply("You cannot preform this command because testMode is on!")
+        p("Not reinitd at "..os.time())
     end
 end)
 
@@ -40,6 +54,11 @@ function reinitialize(message)
             message:reply("Re-Initialized!")
         end
     end
+end
+
+function selfReinitialize()
+    Commands = Tools.initialize()
+    Tools = dofile("./API/tools.lua")
 end
 
 --When a user is banned, post a lenney.

@@ -41,14 +41,7 @@ end
 
 [prefix..'welsh'] = { -- Welsh.
 exec = function (message)
-    message.channel:send("https://cdn.discordapp.com/attachments/748713417489252503/770289379586867231/image0.gif")
-    message:delete()
-end
-};
-
-[prefix..'test'] = { -- Test Command.
-exec = function (message)
-    message.channel:send("I can add new commands on the fly, probably just going to be for testing purposes. Probably a security hole. Hence why this is the _experimental_ branch")
+    message.channel:send("https://cdn.discordapp.com/attachments/748713417489252503/770289379586867231/image0.gif lol")
     message:delete()
 end
 };

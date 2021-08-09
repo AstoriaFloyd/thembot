@@ -1,13 +1,16 @@
 local tools = dofile("./API/tools.lua")
 local rng = dofile("./API/rng.lua")
 local complexCommands = {}
-
 local prefix = dofile("./docs/key.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'helpme'] = { -- Dumps docs/help to chat, took me forever to figure out.
     exec = function (message)
-        message.channel:send(tools.printFile("docs/help"))
+        if tools.testModeDetection() == true then
+            message.channel:send(tools.printFile("docs/helpTestMode"))
+        else
+            message.channel:send(tools.printFile("docs/help"))
+        end
     end
 };
 
@@ -21,6 +24,7 @@ local commands = { -- Define commands its a table that will contain our commands
 end
 };
 
+--[[
 [prefix..'figlet'] = { -- Parrots input to figlet, then echos it to the same channel you are in.
     exec = function (message)
     local prefixLength = string.len(prefix)
@@ -42,6 +46,7 @@ end
     message:delete()
 end
 };
+]]
 
 [prefix..'echo'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
     exec = function (message)

@@ -9,12 +9,25 @@ end
 
 --Initializes commands.
 function tools.initialize()
-    local simpleCommands = dofile("./commands/simpleCommands.lua")
-    local complexCommands = dofile("./commands/complexCommands.lua")
-    local complexCommands = complexCommands.initialize()
-    local simpleCommands = simpleCommands.initialize()
-    local commands = tools.tableMerge(simpleCommands, complexCommands)
-    return commands
+    if tools.testModeDetection() == false then
+        local simpleCommands = dofile("./commands/simpleCommands.lua")
+        local complexCommands = dofile("./commands/complexCommands.lua")
+        local complexCommands = complexCommands.initialize()
+        local simpleCommands = simpleCommands.initialize()
+        local commands = tools.tableMerge(simpleCommands, complexCommands)
+        return commands
+    end
+    if tools.testModeDetection() == true then
+        local simpleCommands = dofile("./commands/simpleCommands.lua")
+        local complexCommands = dofile("./commands/complexCommands.lua")
+        local experimentalCommands = dofile("./commands/experimentalCommands.lua")
+        local simpleCommands = simpleCommands.initialize()
+        local complexCommands = complexCommands.initialize()
+        local experimentalCommands = experimentalCommands.initialize()
+        local commandsP1 = tools.tableMerge(simpleCommands, complexCommands)
+        local commands = tools.tableMerge(commandsP1, experimentalCommands)
+        return commands
+    end
 end
 
 --Reads testmode.lua
