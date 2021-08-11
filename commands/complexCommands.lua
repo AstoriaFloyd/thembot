@@ -54,6 +54,20 @@ end
     local echo = string.sub(message.content, 5+prefixLength)
     local echoed = tools.echo(echo)
     local result = "```fix" .. "\n" .. echoed .. "```"
+    if result == "```fix\n```" then message:delete() return
+    else
+    message.channel:send(result)
+    message:delete()
+    end
+end
+};
+
+[prefix..'echoclean'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
+    exec = function (message)
+    local prefixLength = string.len(prefix)
+    local echo = string.sub(message.content, 10+prefixLength)
+    local echoed = tools.echo(echo)
+    local result = echoed
     message.channel:send(result)
     message:delete()
 end

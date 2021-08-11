@@ -2,31 +2,29 @@
 Basic functions
 ---------------
 -figlet
-Converts text to ASCII art
+Converts text to ASCII art. Currently disabled due to security problems.
 -cowsay
-Converts text to the speech of a cow
+Converts text to the speech of a cow. Currently disabled due to security problems.
 -ping
 Pong!
 -roll [Argument]
 Rolls a dice, by default d20!
 -time
-Displays the time in military time, as if you were in chicago
+Displays the time in military time, as if you were in chicago.
 -helpme
 ^-^
-
 Basic Information
 -----------------
 All functions start with '!' though this may change in the future
 Under construction! More or less from scratch(Only just got basic I/O working!)
 May have secret functions!
-Mess with the code
+Mess with the code to your hearts content.
 ------------------
 The source code is freely availible at 
 https://github.com/AstoriaFloyd/thembot
 Feel free to modify, redistribute, whatever.
 If you want to monitise it, sure go ahead.
 This code follows the WTFPL, in all 0 of its conditions.
-
 Extra Information
 -----------------
 This bot is currently in text mode.

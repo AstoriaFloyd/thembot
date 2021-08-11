@@ -18,28 +18,36 @@ end)
 --Command handler
 client:on('messageCreate', function(message)
     if message.author.bot then return end
+    local shouldReinit = false
     if Tools.testModeDetection() == true and mode == "normal" then
         mode = "testMode"
+        shouldReinit = true
     elseif Tools.testModeDetection() == false and mode == "testMode" then
         mode = "normal"
-        selfReinitialize()
+        shouldReinit = false
     end
     if mode == "testMode" then
-        Commands = Tools.initialize()
-        Tools = dofile("./API/tools.lua")
-        p("reinitd at "..os.time())
+        shouldReinit = true
     end
-    local args = message.content:split(" ")
-    local lowerArgs = args[1]:lower()
-    local command = Commands[lowerArgs]
-    if command then
-        command.exec(message, args)
-    elseif mode == "normal" and Tools.messageDectection(message, "reinitialize") == true then
+    if mode == "normal" and Tools.messageDectection(message, "reinitialize") == true then
         p("reinitd at "..os.time())
         reinitialize(message)
     elseif mode == "testMode" and Tools.messageDectection(message, "reinitialize") == true then
         message:reply("You cannot preform this command because testMode is on!")
         p("Not reinitd at "..os.time())
+    end
+    local args = message.content:split(" ")
+    local lowerArgs = args[1]:lower()
+    local command = Commands[lowerArgs]
+    if command then
+        if shouldReinit == true then
+            Commands = Tools.initialize()
+            Tools = dofile("./API/tools.lua")
+            command = Commands[lowerArgs]
+            p("reinitd at "..os.time())
+            shouldReinit = false
+        end
+        command.exec(message, args)
     end
 end)
 

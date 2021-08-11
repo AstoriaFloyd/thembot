@@ -9,14 +9,12 @@ local commands = { -- Define commands its a table that will contain our commands
         message.channel:send("Experimental mode works!")
     end
 };
-
-[prefix..'test'] = { -- Test Command.
+--[[
+[prefix..'fumo'] = { -- To be implemented later..
 exec = function (message)
-    message.channel:send("I can add new commands on the fly, probably just going to be for testing purposes. Probably a security hole. Hence why this is the _experimental_ branch")
-    message:delete()
 end
 };
-
+]]
 }
 
 function experimentalCommands.initialize()
