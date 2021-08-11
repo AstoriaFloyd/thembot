@@ -6,3 +6,4 @@ launch.json
 interpreter.lua
 docs/reinitialize.lua
 docs/mode.lua
+docs/reinitialize.lua
