@@ -47,7 +47,6 @@ end
 end
 };
 ]]
-
 [prefix..'echo'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
     exec = function (message)
     local prefixLength = string.len(prefix)
