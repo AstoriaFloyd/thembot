@@ -6,4 +6,5 @@ interpreter.lua
 docs/reinitialize.lua
 docs/mode.lua
 docs/reinitialize.lua
+docs/key.lua
 docs/token.lua
