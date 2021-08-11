@@ -9,7 +9,7 @@ client:once("ready", function()
 	print('Logged in as '.. client.user.username)
     Commands = Tools.initialize()
     if Tools.testModeDetection() == true then
-        mode = "testMode"
+        mode = "test"
     else
         mode = "normal"
     end
@@ -20,20 +20,24 @@ client:on('messageCreate', function(message)
     if message.author.bot then return end
     local shouldReinit = false
     if Tools.testModeDetection() == true and mode == "normal" then
-        mode = "testMode"
+        mode = "test"
         shouldReinit = true
-    elseif Tools.testModeDetection() == false and mode == "testMode" then
+    elseif Tools.testModeDetection() == false and mode == "test" then
         mode = "normal"
         shouldReinit = false
     end
-    if mode == "testMode" then
+    if mode == "test" then
         shouldReinit = true
+    end
+    if dofile("./docs/reinitialize.lua") == true then
+        Commands = Tools.initialize()
+        Tools = dofile("./API/tools.lua")
     end
     if mode == "normal" and Tools.messageDectection(message, "reinitialize") == true then
         p("reinitd at "..os.time())
         reinitialize(message)
-    elseif mode == "testMode" and Tools.messageDectection(message, "reinitialize") == true then
-        message:reply("You cannot preform this command because testMode is on!")
+    elseif mode == "test" and Tools.messageDectection(message, "reinitialize") == true then
+        message:reply("You cannot preform this command because test is on!")
         p("Not reinitd at "..os.time())
     end
     local args = message.content:split(" ")

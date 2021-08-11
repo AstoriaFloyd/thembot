@@ -32,10 +32,11 @@ end
 
 --Reads testmode.lua
 function tools.testModeDetection()
-    return dofile("./docs/testmode.lua")
+    local mode = dofile("./docs/mode.lua")
+    if mode == "normal" then return false end
+    if mode == "test" then return true end
 end
 
---
 
 --Reads an entire file, outputs as string.
 function tools.printFile(file)

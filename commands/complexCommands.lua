@@ -73,6 +73,49 @@ end
 end
 };
 
+[prefix..'mode'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
+    exec = function (message, arg)
+        local user = message.guild:getMember(message.author.id)
+        if not user:hasPermission("administrator") then
+            message:reply("You cannot change the mode of this bot!")
+        else
+        file = io.open("./docs/mode.lua", "r+")
+        io.input(file)
+        io.output(file)
+        if tools.testModeDetection() == true then
+            mode = "test"
+        else
+            mode = "normal"
+        end
+        if not arg[2] then message.channel:send("```fix\nNo argument. Get or Set?```") return end
+        if arg[2] ~= "get" and arg[2] ~= "set" then message.channel:send("```fix\nMalformed input, you put in '"..arg[2].."' not get or set.```") return end
+        if arg[2] == "get" then message.channel:send("```fix\nCurrent mode is '"..mode.."'```") return end
+        if arg[2] == "set" then
+            if arg[3] == "normal" then
+                message.channel:send("```fix\nSet mode 'normal'```")
+                file:seek("set", 0)
+                file:write("return 'normal'")
+            elseif arg[3] == "test" then
+                message.channel:send("```fix\nset mode 'test'```")
+                file:seek("set", 0)
+                file:write("return 'test'   \n")
+            elseif arg[3] ~= "normal" or "test" then
+                message.channel:send("```fix\nIncorrect mode, please enter 'normal' or 'test'```")
+            end
+            io.close()
+            file = io.open("./docs/reinitialize.lua", "r+")
+            io.input(file)
+            io.output(file)
+            file:seek("set", 0)
+            file:write("return true ")
+        end
+        io.close()
+        --message.channel:send()
+        --message:delete()
+    end
+end
+};
+
 }
 
 function complexCommands.initialize()
