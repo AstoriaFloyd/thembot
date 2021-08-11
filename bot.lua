@@ -39,7 +39,6 @@ client:on('messageCreate', function(message)
     end
 end)
 
----@diagnostic disable-next-line: lowercase-global
 function reinitialize(message)
   local user = message.guild:getMember(message.author.id)
     if Tools.messageDectection(message, "reinitialize") == true then
