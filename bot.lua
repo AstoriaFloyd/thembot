@@ -8,22 +8,22 @@ client:once("ready", function()
   client:setGame("Astoria's bot, very sad!")
 	print('Logged in as '.. client.user.username)
     Commands = Tools.initialize()
-    mode = Tools.getMode()
+    Mode = Tools.getMode()
 end)
 
 --Command handler
 client:on('messageCreate', function(message)
     if message.author.bot then return end
-    mode = Tools.getMode()
-    if mode == "test" then
+    Mode = Tools.getMode()
+    if Mode == "test" then
         Tools.setReinit(true)
     end
-    if mode == "normal" and Tools.getReinit() == false then
+    if Mode == "normal" and Tools.getReinit() == false then
         Tools.setReinit(false)
     end
-    if mode == "normal" and Tools.messageDectection(message, "reinitialize") == true then
+    if Mode == "normal" and Tools.messageDectection(message, "reinitialize") == true then
         reinitialize()
-    elseif mode == "test" and Tools.messageDectection(message, "reinitialize") == true then
+    elseif Mode == "test" and Tools.messageDectection(message, "reinitialize") == true then
         message:reply("You cannot preform this command because test is on!")
     end
     if Tools.getReinit() == true then
@@ -39,6 +39,7 @@ client:on('messageCreate', function(message)
     end
 end)
 
+---@diagnostic disable-next-line: lowercase-global
 function reinitialize(message)
   local user = message.guild:getMember(message.author.id)
     if Tools.messageDectection(message, "reinitialize") == true then
