@@ -1,2 +1,2 @@
-return 'normal' 
+return 'normal'
 --normal or test

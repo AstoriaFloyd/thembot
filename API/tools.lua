@@ -1,6 +1,4 @@
----@diagnostic disable: undefined-global
 local tools = {}
-
 --initializes or re-initializes the seed of RNG, based on Unix Time.
 function tools.seed()
     local seed = os.time()
@@ -9,15 +7,14 @@ end
 
 --Initializes commands.
 function tools.initialize()
-    if tools.testModeDetection() == false then
+    if tools.getMode() == "normal" then
         local simpleCommands = dofile("./commands/simpleCommands.lua")
         local complexCommands = dofile("./commands/complexCommands.lua")
         local complexCommands = complexCommands.initialize()
         local simpleCommands = simpleCommands.initialize()
         local commands = tools.tableMerge(simpleCommands, complexCommands)
         return commands
-    end
-    if tools.testModeDetection() == true then
+    elseif tools.getMode() == "test" then
         local simpleCommands = dofile("./commands/simpleCommands.lua")
         local complexCommands = dofile("./commands/complexCommands.lua")
         local experimentalCommands = dofile("./commands/experimentalCommands.lua")
@@ -27,16 +24,66 @@ function tools.initialize()
         local commandsP1 = tools.tableMerge(simpleCommands, complexCommands)
         local commands = tools.tableMerge(commandsP1, experimentalCommands)
         return commands
+    else
+        local simpleCommands = dofile("./commands/simpleCommands.lua")
+        local complexCommands = dofile("./commands/complexCommands.lua")
+        local complexCommands = complexCommands.initialize()
+        local simpleCommands = simpleCommands.initialize()
+        local commands = tools.tableMerge(simpleCommands, complexCommands)
+        return commands
     end
 end
 
---Reads testmode.lua
-function tools.testModeDetection()
-    local mode = dofile("./docs/mode.lua")
-    if mode == "normal" then return false end
-    if mode == "test" then return true end
+--Sets mode.lua
+function tools.setMode(mode)
+    local file = io.open("./docs/mode.lua", "r+")
+    io.input(file)
+    io.output(file)
+    file:seek("set", 7)
+    if mode == "test" then
+        file:write("'test'  ")
+    elseif mode == "normal" then
+        file:write("'normal'")
+    else
+        --Default to normal
+        file:write("'normal'")
+    end
+    file:close()
 end
 
+function tools.getMode()
+    local file = io.open("./docs/mode.lua", "r")
+    io.input(file)
+    file:seek("set", 7)
+    local mode = file:read()
+    file:close()
+    mode = mode:gsub("%s+", "")
+    mode = mode:gsub("'", "")
+    return mode
+end
+
+--Sets if we should reinitialize.
+function tools.setReinit(reinit)
+    local reinitFile = io.open("./docs/reinitialize.lua", "r+")
+    io.input(reinitFile)
+    io.output(reinitFile)
+    reinitFile:seek("set", 7)
+    if type(reinit) == "boolean" then
+        if reinit == true then
+            reinitFile:write("true ")
+        elseif reinit == false then
+            reinitFile:write("false")
+        end
+    else
+        --default to no
+        reinitFile:write("return false")
+    end
+    reinitFile:close()
+end
+
+function tools.getReinit()
+    return dofile("./docs/reinitialize.lua")
+end
 
 --Reads an entire file, outputs as string.
 function tools.printFile(file)
