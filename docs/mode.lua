@@ -1,2 +1,1 @@
-return 'normal' 
---normal or test
+return 'normal'
