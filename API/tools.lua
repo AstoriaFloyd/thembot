@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 local tools = {}
 
 --initializes or re-initializes the seed of RNG, based on Unix Time.
