@@ -1,9 +1,9 @@
 discordia.log
 gateway.json
-token.lua
 launch.json
 .vscode
 interpreter.lua
 docs/reinitialize.lua
 docs/mode.lua
 docs/reinitialize.lua
+docs/token.lua
