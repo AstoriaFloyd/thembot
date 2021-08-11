@@ -1,60 +1,81 @@
 local tools = dofile("./API/tools.lua")
 local rng = dofile("./API/rng.lua")
 local complexCommands = {}
-
-local prefix = dofile("./docs/settings.lua")
+local prefix = dofile("./docs/key.lua")
 
 local commands = { -- Define commands its a table that will contain our commands
 [prefix..'helpme'] = { -- Dumps docs/help to chat, took me forever to figure out.
-   exec = function (message)
-        message.channel:send(tools.printFile("docs/help"))
+    exec = function (message)
+        if tools.testModeDetection() == true then
+            message.channel:send(tools.printFile("docs/helpTestMode"))
+        else
+            message.channel:send(tools.printFile("docs/help"))
+        end
     end
-    };
+};
+
 [prefix..'roll'] = { -- Rolls a d20, check RNG for more info.
-   exec = function (message, arg)
+    exec = function (message, arg)
     if not arg[2] then
         message.channel:send(rng.d20())
     else
         message.channel:send(rng.roll(arg))
     end
-    end
-    };
-   --[[
+end
+};
+
+--[[
 [prefix..'figlet'] = { -- Parrots input to figlet, then echos it to the same channel you are in.
-   exec = function (message)
+    exec = function (message)
     local prefixLength = string.len(prefix)
     local figletthis = string.sub(message.content, 7+prefixLength)
     local figlet = tools.figlet(figletthis)
     local result = "```fix" .. "\n" .. figlet .. "```"
     message.channel:send(result)
     message:delete()
-    end
-    };
+end
+};
+
 [prefix..'cowsay'] = { -- Parrots input to cowsay, then echos it to the same channel you are in.
-   exec = function (message)
+    exec = function (message)
     local prefixLength = string.len(prefix)
     local cowsay = string.sub(message.content, 7+prefixLength)
     local cowsaid = tools.cowsay(cowsay)
     local result = "```fix" .. "\n" .. cowsaid .. "```"
     message.channel:send(result)
     message:delete()
-    end
-    };
-   ]]
+end
+};
+]]
 [prefix..'echo'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
-   exec = function (message)
+    exec = function (message)
     local prefixLength = string.len(prefix)
     local echo = string.sub(message.content, 5+prefixLength)
     local echoed = tools.echo(echo)
     local result = "```fix" .. "\n" .. echoed .. "```"
+    if result == "```fix\n```" then message:delete() return
+    else
     message.channel:send(result)
     message:delete()
     end
-    };
+end
+};
+
+[prefix..'echoclean'] = { -- Echo's what you said back out, in a fix codeblock. Could be against TOS.
+    exec = function (message)
+    local prefixLength = string.len(prefix)
+    local echo = string.sub(message.content, 10+prefixLength)
+    local echoed = tools.echo(echo)
+    local result = echoed
+    message.channel:send(result)
+    message:delete()
+end
+};
+
 }
 
 function complexCommands.initialize()
-return commands
+    return commands
 end
 return complexCommands
 -- This project is libre, and licenced under the terms of the
