@@ -54,7 +54,9 @@ end
 
 --When a user is banned, post a lenney.
 client:on('userBan', function(user, guild)
-    guild.systemChannel:send("A user was banned ( ͡° ͜ʖ ͡°)")
+    if guild.systemChannel then
+        guild.systemChannel:send("A user was banned ( ͡° ͜ʖ ͡°)")
+    end
 end)
 
 --Insert Token in a .lua file with simply returns it as a string.
