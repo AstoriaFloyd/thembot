@@ -34,12 +34,12 @@ function tools.initialize()
     end
 end
 
---Sets mode.lua
+--Sets mode
 function tools.setMode(mode)
-    local file = io.open("./docs/mode.lua", "r+")
+    local file = io.open("./docs/mode", "r+")
     io.input(file)
     io.output(file)
-    file:seek("set", 7)
+    file:seek("set", 0)
     if mode == "test" then
         file:write("'test'  ")
     elseif mode == "normal" then
@@ -52,14 +52,18 @@ function tools.setMode(mode)
 end
 
 function tools.getMode()
-    local file = io.open("./docs/mode.lua", "r")
+    local file = io.open("./docs/mode", "r+")
     io.input(file)
-    file:seek("set", 7)
+    file:seek("set", 0)
     local mode = file:read()
     file:close()
-    mode = mode:gsub("%s+", "")
-    mode = mode:gsub("'", "")
-    return mode
+    if mode then
+        mode = mode:gsub("%s+", "")
+        mode = mode:gsub("'", "")
+        return mode
+    else
+        return "normal"
+    end
 end
 
 --Sets if we should reinitialize.
