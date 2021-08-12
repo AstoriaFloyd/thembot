@@ -36,12 +36,11 @@ end
 
 --Sets mode
 function tools.setMode(mode)
-    local file = io.open("./docs/mode", "r+")
-    io.input(file)
+    local file = io.open("./docs/mode", "w")
     io.output(file)
     file:seek("set", 0)
     if mode == "test" then
-        file:write("'test'  ")
+        file:write("'test'")
     elseif mode == "normal" then
         file:write("'normal'")
     else
@@ -52,7 +51,7 @@ function tools.setMode(mode)
 end
 
 function tools.getMode()
-    local file = io.open("./docs/mode", "r+")
+    local file = io.open("./docs/mode", "r")
     io.input(file)
     file:seek("set", 0)
     local mode = file:read()
